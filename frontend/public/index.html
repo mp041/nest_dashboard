@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/js/bootstrap.min.js"
+      integrity="sha512-OvBgP9A2JBgiRad/mM36mkzXSXaJE9BEIENnVEmeZdITvwT09xnxLtT4twkCa8m/loMbPHsvPl0T8lRGVBwjlQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+    <!--
+
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"> </div>
+    <script>
+       function populateUL($ul, data) {
+          // Register the given UL element as the root in a new data structure
+          var hash = {
+              "": { $ul: $ul }
+          };
+          // Key the objects by their id, and create individual LI elements for them,
+          // and an empty UL container for their potential child elements
+          data.forEach(function (o) {
+              // if (o.class) {
+              //     // var $ul = $("<ul>").prepend("<i class='fa fa-chevron-down d4' </i>");
+              //     $("<ul>").append("abc")
+
+              // }
+
+
+              var $ul = $("<ul>")
+
+              hash[o.id] = {
+                  $ul: $ul,
+                  $li: $("<li>").append(`${o.class ? '<i onclick="toggle(this)" id="d1" class="fa fa-chevron-down d4"></i> &nbsp;' : ''}` + "<i class='" + o.icon + "'></i> &nbsp; <a href='demo.html'> " + o.name).append($ul)
+
+              };
+          });
+          console.log(hash);
+          // Append each LI element to the correct parent UL element
+          data.forEach(function (o) {
+              hash[o.parentDirId].$ul.append(hash[o.id].$li);
+          });
+      }
+
+
+      function populateLI($ul, data) {
+          // Register the given UL element as the root in a new data structure
+          var hash = {
+              "": { $ul: $ul }
+          };
+          // Key the objects by their id, and create individual LI elements for them,
+          // and an empty UL container for their potential child elements
+          data.forEach(function (o) {
+
+              // if(o.class){
+              //     document.querySelector(o.class);
+
+
+
+              // }
+              var $ul = $("<ul>");
+              hash[o.id] = {
+                  $ul: $ul,
+                  $li: $("<li>").append("<i class='" + o.icon + "'></i> &nbsp; <a href='demo.html'> " + o.name).append($ul)
+              };
+          });
+          console.log(hash);
+          // Append each LI element to the correct parent UL element
+          data.forEach(function (o) {
+
+
+              hash[o.parentDirId].$ul.append(hash[o.id].$li);
+          });
+      }
+
+
+
+      //some other resonse
+
+      var listresponse = [{
+          "id": "12",
+          "name": "Notes",
+          "icon": "far fa-comment",
+          "parentDirId": ""
+      },
+      {
+          "id": "13",
+          "name": "Settings",
+          "icon": "fas fa-cogs",
+          "parentDirId": ""
+      },
+      {
+          "id": "14",
+          "name": "Devices",
+          "icon": "fas fa-desktop",
+          "parentDirId": ""
+      },
+      {
+          "id": "15",
+          "name": "Deleted Items",
+          "icon": "fas fa-trash-alt",
+          "parentDirId": ""
+      },
+      ]
+
+      // Sample response object
+      var response = [{
+          "id": "1",
+          "name": "Mail",
+          "icon": "far fa-envelope-open",
+          "class": "demo",
+          "parentDirId": ""
+      },
+      {
+          "id": "10",
+          "name": "Inbox",
+          "icon": "far fa-folder-open",
+          "class": "demo",
+          "parentDirId": ""
+      },
+      {
+          "id": "18",
+          "name": "Admin",
+          "icon": "far fa-folder-open",
+          "parentDirId": "10"
+      },
+      {
+          "id": "19",
+          "name": "Corporate",
+          "icon": "far fa-folder-open",
+          "parentDirId": "10"
+      },
+      {
+          "id": "20",
+          "name": "Finance",
+          "icon": "far fa-folder-open",
+          "parentDirId": "10"
+      },
+      {
+          "id": "21",
+          "name": "Other",
+          "icon": "far fa-folder-open",
+          "parentDirId": "10"
+      },
+
+      {
+          "id": "11",
+          "name": "Favourites",
+          "icon": "far fa-gem",
+          "class": "demo",
+          "parentDirId": ""
+      },
+      {
+          "id": "22",
+          "name": "Restaurants",
+          "icon": "fas fa-pepper-hot",
+          "parentDirId": "11"
+      },
+      {
+          "id": "23",
+          "name": "Places",
+          "icon": "far fa-eye",
+          "parentDirId": "11"
+      },
+      {
+          "id": "24",
+          "name": "Games",
+          "icon": "fas fa-gamepad",
+          "parentDirId": "11"
+      },
+      {
+          "id": "25",
+          "name": "Cocktails",
+          "icon": "fas fa-cocktail",
+          "parentDirId": "11"
+      },
+      {
+          "id": "26",
+          "name": "Food",
+          "icon": "fas fa-pizza-slice",
+          "parentDirId": "11"
+      },
+
+
+
+      {
+          "id": "2",
+          "name": "Offers",
+          "icon": "far fa-bell",
+          "parentDirId": "1"
+      },
+
+      {
+          "id": "3",
+          "name": "Contacts",
+          "icon": "far fa-address-book",
+          "parentDirId": "1"
+      },
+
+      {
+          "id": "16",
+          "name": "Calendar",
+          "icon": "far fa-calendar-alt",
+          "class": "demo",
+          "parentDirId": "1"
+      },
+      {
+          "id": "4",
+          "name": "Deadlines",
+          "icon": "far fa-clock",
+          "parentDirId": "16"
+      },
+      {
+          "id": "17",
+          "name": "Meetings",
+          "icon": "fas fa-users",
+          "parentDirId": "16"
+      },
+      {
+          "id": "7",
+          "name": "Workouts",
+          "icon": "fas fa-basketball-ball",
+          "parentDirId": "16"
+      },
+      {
+          "id": "27",
+          "name": "Events",
+          "icon": "fas fa-mug-hot",
+          "parentDirId": "16"
+      },
+      ];
+
+      function toggle(e) {
+
+
+          let selectedElement = $(e.parentElement).find('ul:first');
+          // $(".fa-chevron-down:after").css("color","red");
+          // $("i").toggleClass("example");
+
+          return selectedElement.toggle('slow');
+
+      }
+      // Inject response data into document
+      populateUL($(".abc"), response);
+      populateLI($(".xyz"), listresponse);
+  </script>
+
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
